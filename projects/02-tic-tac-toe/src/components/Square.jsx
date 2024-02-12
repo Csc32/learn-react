@@ -5,7 +5,7 @@ export const Square = ({ children, isSelected, updateBoard, index }) => {
   };
   return (
     <div onClick={handleClick} className={className}>
-      {children}
+      <p className="square-container">{children}</p>
     </div>
   );
 };

@@ -92,6 +92,10 @@ body {
   border-color: transparent;
 }
 
+.square .square-container {
+  margin: 0.6em 0;
+}
+
 .square.is-selected {
   color: #fff;
   background: #09f;
