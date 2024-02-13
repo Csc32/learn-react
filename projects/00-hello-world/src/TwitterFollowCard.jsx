@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 export function TwitterFollowCard({
   children,
-  userName = "unknow",
+  userName = 'unknow',
   initialIsFollowing,
 }) {
   //save the state of the button
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
-  const text = isFollowing ? "Following" : "Follow";
+  const text = isFollowing ? 'Following' : 'Follow';
   const buttonClassName = isFollowing
-    ? "tw-followCard-button is-following"
-    : "tw-followCard-button";
+    ? 'tw-followCard-button is-following'
+    : 'tw-followCard-button';
   const handleClick = () => {
     setIsFollowing(!isFollowing);
   };

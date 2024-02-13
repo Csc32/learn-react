@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Game } from "../components/Game";
-import { TurnBoard } from "../components/TurnBoard";
-import { WinnerModal } from "../components/WinnerModal";
-import { TURNS } from "../constants";
-import { checkWinnerFrom, checkEndGame } from "../logic/board";
-import confetti from "canvas-confetti";
-import { saveGameStorage, resetGameStorage } from "../logic/storage";
+import { useState } from 'react';
+import { Game } from '../components/Game';
+import { TurnBoard } from '../components/TurnBoard';
+import { WinnerModal } from '../components/WinnerModal';
+import { TURNS } from '../constants';
+import { checkWinnerFrom, checkEndGame } from '../logic/board';
+import confetti from 'canvas-confetti';
+import { saveGameStorage, resetGameStorage } from '../logic/storage';
 export function Board() {
   const [board, setBoard] = useState(() => {
     //you need to save in localStorage inside the stage because read from localStorage is very slow
-    const boardFromStorage = window.localStorage.getItem("board");
+    const boardFromStorage = window.localStorage.getItem('board');
     return boardFromStorage
       ? JSON.parse(boardFromStorage)
       : Array(9).fill(null);
   });
   const [turn, setTurn] = useState(() => {
-    const turnFromStorage = window.localStorage.getItem("turn");
+    const turnFromStorage = window.localStorage.getItem('turn');
     return turnFromStorage ?? TURNS.X;
   });
   const [winner, setWinner] = useState(null);

@@ -1,4 +1,4 @@
-import { Square } from "./Square";
+import { Square } from './Square';
 export function Game({ board, updateBoard }) {
   return (
     <section className="game">
