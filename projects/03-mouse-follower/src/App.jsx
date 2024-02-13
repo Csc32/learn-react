@@ -46,7 +46,9 @@ function FollowMouse() {
           transform: `translate(${position.x}px, ${position.y}px)`,
         }}
       ></div>
-      <button onClick={handleClick}>{text}</button>
+      <button onClick={handleClick} type="button">
+        {text}
+      </button>
     </>
   );
 }
