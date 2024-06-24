@@ -6,24 +6,29 @@ export default function App() {
   const DOMAIN_NAME = `https://cataas.com/cat/`;
   const [fact, setFact] = useState();
   const [imageUrl, setImageUrl] = useState();
+  //useEffect to load the page
   useEffect(() => {
     fetch(CAT_ENDPOINT_RAMDON_FACT)
       .then((res) => res.json())
       .then((data) => {
         const { fact } = data;
         setFact(data.fact);
-        const firtsWord = fact.split(' ', 3).join(' ')[0];
-
-        fetch(`${DOMAIN_NAME}says/${firtsWord}?size=50&color=red&json=true`)
-          .then((res) => res.json())
-          .then((response) => {
-            const id = response._id;
-            const url = `${DOMAIN_NAME}${id}/says/${firtsWord}`;
-            console.log(url);
-            setImageUrl(url);
-          });
       });
   }, []);
+  //useEffect to load when a the fact change
+  useEffect(() => {
+    if (!fact) return;
+    const firtsWord = fact.split(' ', 3).join(' ')[0];
+
+    fetch(`${DOMAIN_NAME}says/${firtsWord}?size=50&color=red&json=true`)
+      .then((res) => res.json())
+      .then((response) => {
+        const id = response._id;
+        const url = `${DOMAIN_NAME}${id}/says/${firtsWord}`;
+        console.log(url);
+        setImageUrl(url);
+      });
+  }, [fact]);
   return (
     <main>
       <h1>Cat App</h1>
