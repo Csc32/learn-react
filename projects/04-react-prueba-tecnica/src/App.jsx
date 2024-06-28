@@ -1,37 +1,19 @@
 import { useEffect, useState } from 'react';
-
+import { useCatFat } from './hooks/useCatFat';
+import { useCatImage } from './hooks/useCatimage';
+import { Other } from './components/Other';
 export default function App() {
-  const CAT_ENDPOINT_RAMDON_FACT = 'https://catfact.ninja/fact';
   //const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firtsWord}?json=true`;
-  const DOMAIN_NAME = `https://cataas.com/cat/`;
-  const [fact, setFact] = useState();
-  const [imageUrl, setImageUrl] = useState();
-  //useEffect to load the page
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_RAMDON_FACT)
-      .then((res) => res.json())
-      .then((data) => {
-        const { fact } = data;
-        setFact(data.fact);
-      });
-  }, []);
-  //useEffect to load when a the fact change
-  useEffect(() => {
-    if (!fact) return;
-    const firtsWord = fact.split(' ', 3).join(' ')[0];
+  const { fact, refreshFact } = useCatFat();
+  const { imageUrl } = useCatImage({ fact });
 
-    fetch(`${DOMAIN_NAME}says/${firtsWord}?size=50&color=red&json=true`)
-      .then((res) => res.json())
-      .then((response) => {
-        const id = response._id;
-        const url = `${DOMAIN_NAME}${id}/says/${firtsWord}`;
-        console.log(url);
-        setImageUrl(url);
-      });
-  }, [fact]);
+  const handleClick = async function () {
+    refreshFact();
+  };
   return (
     <main>
       <h1>Cat App</h1>
+      <button onClick={handleClick}>Get new Fact</button>
       <section
         style={{
           display: 'flex',
@@ -45,10 +27,11 @@ export default function App() {
           <img
             src={imageUrl}
             alt={`Random cat generate with the firts letter of: ${fact}`}
-            style={{ minWidth: '100px', minHeight: 'auto' }}
+            style={{ width: '300px', height: 'auto' }}
           />
         )}
       </section>
+      <Other>ggG</Other>
     </main>
   );
 }
