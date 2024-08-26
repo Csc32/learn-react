@@ -1,11 +1,9 @@
-import products from '/mocks/product.json';
 import Product from './Product.jsx';
 
-export function ListProducts() {
-  const productsJson = products.products;
+export function ListProducts({ products }) {
   return (
     <ul className="product-list">
-      {productsJson.map((product) => {
+      {products.map((product) => {
         return (
           <Product
             key={product.id}
